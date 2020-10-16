@@ -1,5 +1,5 @@
-function MemberFactory() {
-  this.createMember = (name, type) => {
+class MemberFactory {
+  createMember(name, type) {
     let member;
 
     if (type === "simple") {
@@ -13,35 +13,42 @@ function MemberFactory() {
     member.type = type;
 
     member.define = function () {
-      console.log(`${this.name} (${this.type}) : (${this.cost})`);
-    }; // = 으로 정의 시 arrow function은 쓰지 말 것
+      console.log(`${this.name} (${this.type}): ${this.cost}`);
+    };
 
     return member;
-  };
+  }
 }
 
-const SimpleMembership = function (name) {
-  this.name = name;
-  this.cost = "$5";
-};
+class SimpleMembership {
+  constructor(name) {
+    this.name = name;
+    this.cost = "$5";
+  }
+}
 
-const StandardMembership = function (name) {
-  this.name = name;
-  this.cost = "$15";
-};
+class StandardMembership {
+  constructor(name) {
+    this.name = name;
+    this.cost = "$15";
+  }
+}
 
-const SuperMembership = function (name) {
-  this.name = name;
-  this.cost = "$30";
-};
+class SuperMembership {
+  constructor(name) {
+    this.name = name;
+    this.cost = "$25";
+  }
+}
 
 const members = [];
 const factory = new MemberFactory();
 
-members.push(factory.createMember("Juny", "simple"));
-members.push(factory.createMember("Tony", "standard"));
-members.push(factory.createMember("Sunwoo", "super"));
+members.push(factory.createMember("John Doe", "simple"));
+members.push(factory.createMember("Chris Jackson", "super"));
+members.push(factory.createMember("Janice Williams", "simple"));
+members.push(factory.createMember("Tom Smith", "standard"));
 
-members.forEach((member) => {
+members.forEach(function (member) {
   member.define();
 });
